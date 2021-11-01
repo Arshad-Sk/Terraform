@@ -14,9 +14,9 @@ locals {
         instance_type = srv.instance_type
        # subnet_id   = srv.subnet_id
         ami = srv.ami
-        security_groups = [aws_security_group.awssg.id]
-        #vpc_security_group_ids = [aws_security_group.awssg.id]
-        # sparkkey = [aws_key_pair.awskey]
+        security_groups = [aws_security_group.awssg_jkn.id]
+        #vpc_security_group_ids = [aws_security_group.awssg_jkn.id]
+        # sparkkey_jkn = [aws_key_pair.awskey]
       }
     ]
   ]
@@ -30,8 +30,8 @@ resource "aws_instance" "web" {
   ami           = each.value.ami
   instance_type = each.value.instance_type
   vpc_security_group_ids = each.value.security_groups
-     # vpc_security_group_ids = [aws_security_group.awssg.id]
-   key_name = "sparkkey"
+     # vpc_security_group_ids = [aws_security_group.awssg_jkn.id]
+   key_name = "sparkkey_jkn"
 
  
   user_data = <<EOF
@@ -84,15 +84,15 @@ output "instances" {
 
 #Key
 resource "aws_key_pair" "awskey" {
-  key_name   = "sparkkey"
+  key_name   = "sparkkey_jkn"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC838Zt/LMy2cJP505/k9eCc1i1Dqsn/CRgdMkiuJ3BQFeG/B1jmmQLYBbP1R6SWMALzlVTTeJJJBXRwHgKFYPQsBqxG4ilOVKozCtLq2azlooqbJRIOTGYqFffeqqj6jk1QDX0aEXgtgj1MnlU0DIbc326F54ED/k3tQ/P4Qte4wD/j2y7IgrZAYPMB0wlG70FJBTlFpLz/TTEtaQleO5mNMnMHDYCKH6gnb51pN7NFOE5aWv+wNMJaVbvVaCDTvtlCZYk3ylu9zgKGYM3A1NOG65avRoRjQxCBk803Fiy1vO4hYJT4XACwcUWcLbgmfX0ET2vJ8cHdYZSIBNDpTHX arshad.shaik@IN-IT6644"
 }
 
 #############################
 
 # Security Group
-resource "aws_security_group" "awssg" {
-  name        = "awssg"
+resource "aws_security_group" "awssg_jkn" {
+  name        = "awssg_jkn"
   description = "Allow TLS inbound traffic"
   #vpc_id      = aws_vpc.myvpc.id
   vpc_id = aws_default_vpc.default.id
@@ -126,111 +126,3 @@ resource "aws_security_group" "awssg" {
     Name = "allow_tls"
   }
 }
-
-
-
-/*
-#local
-locals {
-  prod_env = "prod"
-}
-
-resource "aws_instance" "myserver"  {
-     ami = "ami-00399ec92321828f5"
-    # instance_type = "t2.micro"
-      instance_type = var.instance_type
-      count = 2
-     tags = {
-          Name = "${local.prod_env}_TF_tag"
-          }
-
-         
-    key_name = "sparkkey"
-    vpc_security_group_ids = [aws_security_group.awssg.id]
-
-      user_data = <<-EOF
-      #!/bin/sh
-      sudo yum install java-1.8.0-openjdk
-      EOF
-   
-}
-
-#variable
-   variable "instance_type" {
-   description = "Instance type t2.micro"
-   type        = string
-   default     = "t2.micro"
-}
-
-
-#Key
-resource "aws_key_pair" "awskey" {
-  key_name   = "sparkkey"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNbHix6qulhUHL0uuS/rQ5cZhjV2HoRnQiB/bviytq1szLB7UZUmJb0/m0eowHytUrH6oV6r3zUOFMMtwRJuyKNvkanYjZW+graxplCl+eWQmVk5yQzyZKlXZKw2c26JyR/dfAYYvf7zTqAQWQFSVZBtds23WYcQUGK1kffr0XQiUHyir1Khmk5TjQLH9k8Zn1WGyadPVZd2PaMrUgSsPIc+oGt4XLQ3Ji5PALum+tM2A+krXS2PXZ9EQIe+qZXGiFEJ+SltAwEda+1PBtFb+ZsGnyh99fNZPer4q80RWo37OA8DXytQOU2wb3zsSAOodvq7H8S3zX4x2LQfnCrJAL root@ip-172-31-20-87.us-east-2.compute.internal"
-}
-
-#Default VPC
-resource "aws_default_vpc" "default" {
-  tags = {
-    Name = "${local.prod_env}_Default VPC"
-  }
-}
-variable "ingress_ports" {
-  type        = list(number)
-  description = "list of ingress ports"
-  default     = [22, 8080, 18080, 8081]
-}
-
-# Security Group
-resource "aws_security_group" "awssg" {
-  name        = "awssg"
-  description = "Allow TLS inbound traffic"
-  #vpc_id      = aws_vpc.myvpc.id
-  vpc_id = aws_default_vpc.default.id
-
-  dynamic "ingress" {
-    iterator = port
-    for_each = var.ingress_ports
-    content {
-      from_port   = port.value
-      to_port     = port.value
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
-  }
-
- egress = [
-    {
-      description      = "TLS from VPC"
-      from_port        = 0
-      to_port          = 0
-      protocol         = "-1"
-      cidr_blocks      = ["0.0.0.0/0"]
-            ipv6_cidr_blocks = ["::/0"]
-
-     prefix_list_ids  = []
-      security_groups  = []
-      self = false
-    }
-  ]
-
-  tags = {
-    Name = "${local.prod_env}_allow_tls"
-  }
-}
-
-
-
-
-#Output
-output "server_public_ip" {
-     value = aws_instance.myserver.*.public_ip
-
-}
-
-output "ports" {
-  value = aws_security_group.awssg.ingress[*].from_port
-  #value = aws_security_group.vault.ingress.*.from_port
-}
-
-*/
