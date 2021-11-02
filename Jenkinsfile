@@ -16,7 +16,7 @@ pipeline {
     stages {
             stage('TerraformInit'){
             steps {
-                dir('jenkins-terraform-pipeline/ec2_pipeline/'){
+                dir('/var/lib/jenkins/workspace/arshad/'){
                     sh "terraform init -input=false"
                     sh "echo \$PWD"
                     sh "whoami"
@@ -26,7 +26,7 @@ pipeline {
 
         stage('TerraformFormat'){
             steps {
-                dir('jenkins-terraform-pipeline/ec2_pipeline/'){
+                dir('/var/lib/jenkins/workspace/arshad/'){
                     sh "terraform fmt -list=true -write=false -diff=true -check=true"
                 }
             }
@@ -34,7 +34,7 @@ pipeline {
 
         stage('TerraformValidate'){
             steps {
-                dir('jenkins-terraform-pipeline/ec2_pipeline/'){
+                dir('/var/lib/jenkins/workspace/arshad/'){
                     sh "terraform validate"
                 }
             }
@@ -42,16 +42,16 @@ pipeline {
 
         stage('TerraformPlan'){
             steps {
-                dir('jenkins-terraform-pipeline/ec2_pipeline/'){
+                dir('/var/lib/jenkins/workspace/arshad/'){
                     script {
                         try {
                             sh "terraform workspace new ${params.WORKSPACE}"
                         } catch (err) {
                             sh "terraform workspace select ${params.WORKSPACE}"
                         }
-                        sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' \
-                        -out terraform.tfplan;echo \$? > status"
-                        stash name: "terraform-plan", includes: "terraform.tfplan"
+                        sh "terraform plan -var-file="dev.tfvars" -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' \
+                        -out devtfplan.out;echo \$? > status"
+                        stash name: "terraform-plan", includes: "devtfplan.out"
                     }
                 }
             }
@@ -69,9 +69,9 @@ pipeline {
                          currentBuild.result = 'UNSTABLE'
                     }
                     if(apply){
-                        dir('jenkins-terraform-pipeline/ec2_pipeline/'){
+                        dir('/var/lib/jenkins/workspace/arshad/'){
                             unstash "terraform-plan"
-                            sh 'terraform apply terraform.tfplan' 
+                            sh 'terraform apply "devtfplan.out"' 
                         }
                     }
                 }
