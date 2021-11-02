@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-       terraform 'terraform-2'
+       terraform 'Terraform-2'
     }
     parameters {
         string(name: 'WORKSPACE', defaultValue: 'development', description:'setting up workspace for terraform')
