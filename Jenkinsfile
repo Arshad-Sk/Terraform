@@ -16,33 +16,33 @@ pipeline {
     stages {
             stage('TerraformInit'){
             steps {
-                dir('/var/lib/jenkins/workspace/arshad/'){
+               
                     sh "terraform init -input=false"
                     sh "echo \$PWD"
                     sh "whoami"
-                }
+                
             }
         }
 
         stage('TerraformFormat'){
             steps {
-                dir('/var/lib/jenkins/workspace/arshad/'){
+                
                     sh "terraform fmt -list=true -write=false -diff=true -check=true"
-                }
+                
             }
         }
 
         stage('TerraformValidate'){
             steps {
-                dir('/var/lib/jenkins/workspace/arshad/'){
+               
                     sh "terraform validate"
-                }
+                
             }
         }
 
         stage('TerraformPlan'){
             steps {
-                dir('/var/lib/jenkins/workspace/arshad/'){
+               
                     script {
                         try {
                             sh "terraform workspace new ${params.WORKSPACE}"
@@ -55,7 +55,7 @@ pipeline {
                         stash name: "terraform-plan", includes: "devtfplan.out"
                          sh "echo \$PWD"
                     }
-                }
+                
             }
         }
         
@@ -71,10 +71,10 @@ pipeline {
                          currentBuild.result = 'UNSTABLE'
                     }
                     if(apply){
-                        dir('/var/lib/jenkins/workspace/arshad/'){
+                       
                             unstash "terraform-plan"
                             sh 'terraform apply "devtfplan.out"' 
-                        }
+                        
                     }
                 }
             }
