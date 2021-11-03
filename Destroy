@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    tools {
+       terraform 'Terrafrom-2'
+    }
+     environment {
+        TF_HOME = tool('Terrafrom-2')
+        TP_LOG = "WARN"
+        PATH = "$TF_HOME:$PATH"
+        }
+        
+     stages {
+            stage('TerraformDestroy'){
+            steps {
+             sh "terraform destroy"
+             
+             }
+             }
+             }
+             }
