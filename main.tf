@@ -6,6 +6,8 @@ provider "aws"  {
     # access_key = "AKIAV6J2SDIZYG4SWBUK"
     # secret_key = "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"
 }
+variable "access_key" {}
+variable "secret_key" {}
 
 
 locals {
