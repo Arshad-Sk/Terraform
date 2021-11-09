@@ -68,6 +68,8 @@ pipeline {
                        
                             unstash "terraform-plan"
                             sh 'terraform apply "devtfplan.out"' 
+                            sh "echo slepping"
+                            sleep(time: 180, unit: "SECONDS")
                         
                     }
                 }
