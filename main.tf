@@ -64,6 +64,8 @@ EOF
  ## subnet_id = each.value.subnet_id
   tags = {
     Name = "${each.value.instance_name}"
+    cluster = "spk"
+    Env = "${each.value.tag_name}"
   }
 }
 
