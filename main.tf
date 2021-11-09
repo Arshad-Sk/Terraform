@@ -14,6 +14,7 @@ locals {
       for i in range(1, srv.no_of_instances+1) : {
         instance_name = "${srv.application_name}-${i}"
         instance_type = srv.instance_type
+        tag_name = srv.application_name
        # subnet_id   = srv.subnet_id
         ami = srv.ami
         security_groups = [aws_security_group.awssg_jkn.id]
