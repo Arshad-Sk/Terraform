@@ -18,13 +18,15 @@ pipeline {
                     sh "echo \$PWD"
                     sh "whoami"
                 
-            }
+                  }
         }
-            stage('TerraformDestroy'){
-            steps {
-             sh "terraform destroy"
+      
+      stage('TerraformDestroy'){
+      
+          steps {
+                   sh "terraform destroy"
              
-             }
+                }
              }
              }
              }
