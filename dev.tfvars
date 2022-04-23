@@ -13,8 +13,7 @@ configuration = [
     "instance_type" : "t2.micro",
     "no_of_instances" : "2"
    # "vpc_security_group_ids" : ["aws_security_group.awssg.id"]
-  }
-  
+  }  
 ]
 
 
