@@ -1,7 +1,7 @@
 provider "aws"  {
          
-    # region = "us-east-1"
-     use_fips_endpoint = true
+    region = "us-east-1"
+     
    
 }
 variable "access_key" {}
