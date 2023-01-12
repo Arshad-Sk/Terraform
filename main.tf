@@ -1,7 +1,7 @@
 provider "aws"  {
          
      region = "us-east-1"
-     version = "3.15"
+     version = "4.49.0"
    
 }
 variable "access_key" {}
