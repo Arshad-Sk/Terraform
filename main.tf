@@ -1,6 +1,6 @@
 provider "aws"  {
          
-     region = "us-east-1"
+    # region = "us-east-1"
      use_fips_endpoint = true
    
 }
