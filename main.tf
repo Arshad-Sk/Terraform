@@ -60,7 +60,8 @@ sudo adduser ansible
 sudo mkdir /home/ansible/.ssh
 sudo chown ansible:ansible /home/ansible/.ssh
 sudo chmod 700 /home/ansible/.ssh/
-echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHoRVOQ6qFpSX0/UTdRRqO9GavOeJGkom0bIALN3OZdYOtkjBLdyDS09YVbrT4BL7FIX3EFARTl+hSRDgV5Gg10tnRs1o3FrXG7hx9xrwBxPuGdocRZQUryNPn6q59zcScKEOJjqQDhAXHUFONDRv/B9y/Dga1mK1qiu8Ysw/mNpLnD7VC0ROKureynhy3PeWw6BBkNCc9tx4dCo0LkibXC2wbh83WGHLYX1YpSRYN9BZLPpzOLuPwR087xh7rtxnDbE7NpMIH5bWee5vilVyVhVr9yhIAEyrz6FF0iWhUQGxqJP3BPVR5MugpjHuuHMqQpRo7fqLbc788KMeZzH0J ansible@ip-172-31-0-117.us-east-2.compute.internal" >> /home/ansible/.ssh/authorized_keys
+#echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHoRVOQ6qFpSX0/UTdRRqO9GavOeJGkom0bIALN3OZdYOtkjBLdyDS09YVbrT4BL7FIX3EFARTl+hSRDgV5Gg10tnRs1o3FrXG7hx9xrwBxPuGdocRZQUryNPn6q59zcScKEOJjqQDhAXHUFONDRv/B9y/Dga1mK1qiu8Ysw/mNpLnD7VC0ROKureynhy3PeWw6BBkNCc9tx4dCo0LkibXC2wbh83WGHLYX1YpSRYN9BZLPpzOLuPwR087xh7rtxnDbE7NpMIH5bWee5vilVyVhVr9yhIAEyrz6FF0iWhUQGxqJP3BPVR5MugpjHuuHMqQpRo7fqLbc788KMeZzH0J ansible@ip-172-31-0-117.us-east-2.compute.internal" >> /home/ansible/.ssh/authorized_keys
+echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFRt3+Dl3qQwJGP3bj0P/OHXHy2bUk2rDMokJQjfcsVr9YdcSl+CVQ9/IRNy7bSMRqcUqgyhvjZ4k01Oh7Wxdn5/O95l/f+EpDCJp/VG1OgKXnyCmYP7nOAKcaOmnBH/D1L7f6RIpcl4Jl1L3OxBVKNRt6x/jNPZjF8TY+/aRj2sIpEAlSlVwaNEGbT9QVlo2Tf6kEwm4DvZ2ggOMPUelwsBaDHDIzyanZYDU7rw04oP+XJlJA01ldMxMi74QOWokBz7jPb35m/1TSdsd3dBI+Zb5vAQJFFzQ67tdh85AT6oZCE4CoY+Y9scMUUU/dPIUZJIvzidepSKISyWgMDOq/ ansible@ip-172-31-68-44.ec2.internal" >> /home/ansible/.ssh/authorized_keys
 sudo chown ansible:ansible /home/ansible/.ssh/authorized_keys
 sudo chmod 600 /home/ansible/.ssh/authorized_keys
 sudo sed -i '63 s/^/#&/' /etc/ssh/sshd_config
