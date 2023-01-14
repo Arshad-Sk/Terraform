@@ -21,9 +21,7 @@ pipeline {
                     sh "terraform init -input=false"
                     sh "echo \$PWD"
                     sh "whoami"
-                    sh "echo \$SECRET_KEY"
-        sh "echo \$ACCESS_KEY"
-                
+                                    
             }
         }
         
