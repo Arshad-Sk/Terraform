@@ -50,7 +50,8 @@ sudo adduser ansible
 sudo mkdir /home/ansible/.ssh
 sudo chown ansible:ansible /home/ansible/.ssh
 sudo chmod 700 /home/ansible/.ssh/
-echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFRt3+Dl3qQwJGP3bj0P/OHXHy2bUk2rDMokJQjfcsVr9YdcSl+CVQ9/IRNy7bSMRqcUqgyhvjZ4k01Oh7Wxdn5/O95l/f+EpDCJp/VG1OgKXnyCmYP7nOAKcaOmnBH/D1L7f6RIpcl4Jl1L3OxBVKNRt6x/jNPZjF8TY+/aRj2sIpEAlSlVwaNEGbT9QVlo2Tf6kEwm4DvZ2ggOMPUelwsBaDHDIzyanZYDU7rw04oP+XJlJA01ldMxMi74QOWokBz7jPb35m/1TSdsd3dBI+Zb5vAQJFFzQ67tdh85AT6oZCE4CoY+Y9scMUUU/dPIUZJIvzidepSKISyWgMDOq/ ansible@ip-172-31-68-44.ec2.internal" >> /home/ansible/.ssh/authorized_keys
+#echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFRt3+Dl3qQwJGP3bj0P/OHXHy2bUk2rDMokJQjfcsVr9YdcSl+CVQ9/IRNy7bSMRqcUqgyhvjZ4k01Oh7Wxdn5/O95l/f+EpDCJp/VG1OgKXnyCmYP7nOAKcaOmnBH/D1L7f6RIpcl4Jl1L3OxBVKNRt6x/jNPZjF8TY+/aRj2sIpEAlSlVwaNEGbT9QVlo2Tf6kEwm4DvZ2ggOMPUelwsBaDHDIzyanZYDU7rw04oP+XJlJA01ldMxMi74QOWokBz7jPb35m/1TSdsd3dBI+Zb5vAQJFFzQ67tdh85AT6oZCE4CoY+Y9scMUUU/dPIUZJIvzidepSKISyWgMDOq/ ansible@ip-172-31-68-44.ec2.internal" >> /home/ansible/.ssh/authorized_keys
+echo -e "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3PI7GCww+optY4EoDlU/mVDNaUk+zd+i2OsLqNvI03NyM6nr4OCwKARGzBjegAGKtclG2om+FIH6vB2bRIv+k4jMYyxIz0tCuyCL3dnoEKzk87Nyd6nZGSZWG3SELShgG3k7qk+HM4mkj8lrgboyPyceWN6SsiXgDFYtvI8xZlglaR0EiziL/Mewj4CKqHE9e7TzQzaDYFdgUTdTz8LXyQBMlK6jigMen33kUa1cWNUMmssEaMcTa82J/hojO85l0XZxNHmZ5rXFfeTuRzT0HIYMyCFbWVLJKNNwFCOH8EcLlMkUnx+Ub2349EhIbzd2AElnk/pfN9CT7evMsINt9foxg6jUySYL9qjSdk/Ixh7cyMIWhKop+kATlyb+6K2Q768d2iXXxAcI2Z4UJYO/UKPqwPwaI6b2SApBoIcBsAksLJwMGtcwqbLIN1LlDcZ7pJN+9FifbpcVfx5ti+mlApNPnYrD2qwtLpI/fL0ElN0OxHIvwUf6N/D3E7gw/cec= ansible@ip-172-31-18-254.eu-north-1.compute.internal" >> /home/ansible/.ssh/authorized_keys
 sudo chown ansible:ansible /home/ansible/.ssh/authorized_keys
 sudo chmod 600 /home/ansible/.ssh/authorized_keys
 sudo sed -i '63 s/^/#&/' /etc/ssh/sshd_config
